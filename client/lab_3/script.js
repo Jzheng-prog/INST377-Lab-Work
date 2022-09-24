@@ -26,6 +26,13 @@ function updateSlidePosition() {
 
   // outside your .forEach,
   // add a 'visible' class to the slide at the current slidePosition in slides
+
+  slidesArray.forEach((slide) => {
+    slide.classList.remove('visible');
+    slide.classList.add('hidden');
+  });
+  console.log(slidePosition);
+  slides[slidePosition].classList.add('visible');
 }
 
 function moveToNextSlide() {
@@ -35,6 +42,11 @@ function moveToNextSlide() {
     and if so, sets your slidePosition to the first index of an array
     if not, set the slidePosition to the current position plus one
   */
+  console.log('I am inside moveToNextSlide');
+  if(){
+    slidePosition = 0;
+  }
+
   updateSlidePosition(); // this is how you call a function within a function
 }
 function moveToPrevSlide() {
@@ -45,6 +57,7 @@ function moveToPrevSlide() {
     and if so, sets your slidePosition to the last slide position in totalSlides
     if not, set the slidePosition to the current position minus one
   */
+  console.log('I am inside movePrev');
   updateSlidePosition();
 }
 
