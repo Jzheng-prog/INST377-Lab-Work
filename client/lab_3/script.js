@@ -43,9 +43,6 @@ function moveToNextSlide() {
     if not, set the slidePosition to the current position plus one
   */
   console.log('I am inside moveToNextSlide');
-  if(){
-    slidePosition = 0;
-  }
 
   updateSlidePosition(); // this is how you call a function within a function
 }
