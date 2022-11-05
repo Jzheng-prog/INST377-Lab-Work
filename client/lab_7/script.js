@@ -50,10 +50,10 @@ function injectHTML(list) {
 function processRestaurants(list) {
   console.log('fired restaurants list');
   const range = [...Array(15).keys()];
-  const newArray = range.map((item)=> {
+  const newArray = range.map((item) => {
     const index = getRandomIntInclusive(0, list.length);
     return list[index];
-  })
+  });
   return newArray;
   /*
     ## Process Data Separately From Injecting It
@@ -74,13 +74,13 @@ function processRestaurants(list) {
     - Return the new list of 15 restaurants so we can work on it separately in the HTML injector
   */
 }
-function filterList(array, filterInputValue){
-    return array.filer((item) => {
-        if(!item.name) { return; }
-        const lowerCaseName = item.name.toLowerCase();
-        const lowerCaseQuery = filterInputValue.toLowerCase();
-        return lowerCaseName.includes(lowerCaseQuery);
-    });
+function filterList(array, filterInputValue) {
+  return array.filer((item) => {
+    if (!item.name) { return; }
+    const lowerCaseName = item.name.toLowerCase();
+    const lowerCaseQuery = filterInputValue.toLowerCase();
+    return lowerCaseName.includes(lowerCaseQuery);
+  });
 }
 async function mainEvent() {
   /*
@@ -120,19 +120,17 @@ async function mainEvent() {
   console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (!arrayFromJson.data?.length > 0) //return if we dont have data
-    
+  if (!arrayFromJson.data?.length > 0) { // return if we dont have data
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
 
     let currentList = [];
 
-    form.addEventListener('input', (event)=>{
-        console.log(event.target.value);
-        const filteredList = filterList(currentList, event.target.value);
-        injectHTML(filteredList);
-
+    form.addEventListener('input', (event) => {
+      console.log(event.target.value);
+      const filteredList = filterList(currentList, event.target.value);
+      injectHTML(filteredList);
     });
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
     // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
