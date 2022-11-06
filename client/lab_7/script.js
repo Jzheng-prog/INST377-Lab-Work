@@ -122,7 +122,7 @@ async function mainEvent() {
   console.log('before if statement');
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (!arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
+  if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
     console.log('its inside the array the length jason');
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
     loadAnimation.classList.remove('lds-ellipsis');
