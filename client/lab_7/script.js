@@ -74,7 +74,14 @@ function processRestaurants(list) {
     - Return the new list of 15 restaurants so we can work on it separately in the HTML injector
   */
 }
-
+function filterList(array, filterInputValue) {
+  return array.filter((item) => {
+    if (!item.name) { return; }
+    const lowName = item.name.toLowerCase();
+    const lowQuery = filterInputValue.toLowerCase();
+    return lowName.includes(lowQuery);
+  });
+}
 async function mainEvent() {
   /*
     ## Main Event
@@ -113,10 +120,18 @@ async function mainEvent() {
   console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
+  if (!arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
+
+    let currentList = [];
+
+    form.addEventListener('input', (event) => { 
+      console.log(event.target.value);
+      const filteredList = filterList(currentList, event.target.value);
+      injectHTML(filteredList);
+    });
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
     // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
     form.addEventListener('submit', (submitEvent) => {
@@ -124,11 +139,11 @@ async function mainEvent() {
       submitEvent.preventDefault();
 
       // This constant will have the value of your 15-restaurant collection when it processes
-      const restaurantList = processRestaurants(arrayFromJson.data);
-      console.log(restaurantList);
+      currentList = processRestaurants(arrayFromJson.data);
+      console.log(currentList);
 
       // And this function call will perform the "side effect" of injecting the HTML list for you
-      injectHTML(restaurantList);
+      injectHTML(currentList);
 
       // By separating the functions, we open the possibility of regenerating the list
       // without having to retrieve fresh data every time
