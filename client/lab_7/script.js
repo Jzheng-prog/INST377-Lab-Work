@@ -129,7 +129,7 @@ async function mainEvent() {
     let currentList = [];
 
     form.addEventListener('input', (event) => {
-      console.log(event.target.value);
+      // console.log(event.target.value);
       const filteredList = filterList(currentList, event.target.value);
       injectHTML(filteredList);
     });
