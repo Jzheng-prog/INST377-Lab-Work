@@ -110,20 +110,17 @@ async function mainEvent() {
     Dot notation is preferred in JS unless you have a good reason to use brackets
     The 'data' key, which we set at line 38 in foodServiceRoutes.js, contains all 1,000 records we need
   */
-  console.table(arrayFromJson.data);
+  // console.table(arrayFromJson.data);
 
   // in your browser console, try expanding this object to see what fields are available to work with
   // for example: arrayFromJson.data[0].name, etc
-  console.log(arrayFromJson.data[0]);
+  // console.log(arrayFromJson.data[0]);
 
   // this is called "string interpolation" and is how we build large text blocks with variables
-  console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
-
-  console.log('before if statement');
+  // console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
   if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
-    console.log('its inside the array the length jason');
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
@@ -152,7 +149,6 @@ async function mainEvent() {
       // We also have access to some form values, so we could filter the list based on name
     });
   }
-  console.log('after if statement');
 }
 
 /*
