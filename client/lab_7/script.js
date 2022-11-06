@@ -125,7 +125,7 @@ async function mainEvent() {
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
 
-    // let currentList = [];
+    let currentList = [];
 
     // form.addEventListener('input', (event) => {
     //   console.log(event.target.value);
@@ -139,7 +139,7 @@ async function mainEvent() {
       submitEvent.preventDefault();
 
       // This constant will have the value of your 15-restaurant collection when it processes
-      const currentList = processRestaurants(arrayFromJson.data);
+      currentList = processRestaurants(arrayFromJson.data);
       console.log(currentList);
 
       // And this function call will perform the "side effect" of injecting the HTML list for you
