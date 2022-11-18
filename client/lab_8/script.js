@@ -84,7 +84,7 @@ function filterList(array, filterInputValue) {
 }
 function innitMap(){
   console.log('innitMap');
-  const map = L.map('map').setView([51.505, -0.09], 13);
+  const map = L.map('map').setView([38.9849, -76.9378], 13);
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
