@@ -94,8 +94,13 @@ function innitMap() {
 }
 
 function markerPlace(array, map) {
-  console.log('markerPlace', array);
-  const marker = L.marker([51.5, -0.09]).addTo(map);
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      layer.remove();
+    }
+  });
+
+  // const marker = L.marker([51.5, -0.09]).addTo(map);
 
   array.forEach((element) => {
     const {coordinates} = element.geocoded_column_1;
