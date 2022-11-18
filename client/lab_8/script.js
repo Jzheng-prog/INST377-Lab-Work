@@ -82,22 +82,22 @@ function filterList(array, filterInputValue) {
     return lowName.includes(lowQuery);
   });
 }
-function innitMap(){
+function innitMap() {
   console.log('innitMap');
   const map = L.map('map').setView([38.9849, -76.9378], 13);
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map); 
+  }).addTo(map);
   return map;
 }
 
-function markerPlace(array, map){
+function markerPlace(array, map) {
   console.log('markerPlace', array);
   const marker = L.marker([51.5, -0.09]).addTo(map);
 
-  array.forEach(element => {
+  array.forEach((element) => {
     const {coordinate} = element.geocoded_column_1;
     L.marker([coordinates[1], coordinates[0]]).addTo(map);
   });
@@ -152,7 +152,6 @@ async function mainEvent() {
       const filteredList = filterList(currentList, event.target.value);
       injectHTML(filteredList);
       markerPlace(currentList, pageMap);
-
     });
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
     // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
