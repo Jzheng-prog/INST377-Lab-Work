@@ -102,9 +102,12 @@ function markerPlace(array, map) {
 
   // const marker = L.marker([51.5, -0.09]).addTo(map);
 
-  array.forEach((element) => {
+  array.forEach((element, index) => {
     const {coordinates} = element.geocoded_column_1;
     L.marker([coordinates[1], coordinates[0]]).addTo(map);
+    if (index === 0) {
+      map.setView([coordinates[1], coordinates[0]], 12);
+    }
   });
 }
 async function mainEvent() {
@@ -156,7 +159,7 @@ async function mainEvent() {
       console.log(event.target.value);
       const filteredList = filterList(currentList, event.target.value);
       injectHTML(filteredList);
-      markerPlace(currentList, pageMap);
+      markerPlace(filteredList, pageMap);
     });
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
     // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
