@@ -4,14 +4,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prof A's Labs for INST377</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" -->
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
     crossorigin=""/>
     <link rel="stylesheet" href="style.css" />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    <!-- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-    crossorigin=""></script>
+    crossorigin=""></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -30,7 +31,10 @@
         </div>
         <div class="right_section box">
             <h3>Local Restaurants</h3>
-            <div id="map"></div>
+            <div>
+              <canvas id="myChart"></canvas>
+            </div>
+            <!-- <div id="map"></div> -->
             <div class="box" id = "resturant_list"> A List of Local Resturant</div>
         </div>
       </div>
