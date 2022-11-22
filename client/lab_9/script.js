@@ -117,7 +117,7 @@ async function mainEvent() {
         When you're not working in a heavily-commented "learning" file, this also is more legible
         If you separate your work, when one piece is complete, you can save it and trust it
     */
-  const pageMap = innitMap();
+  // const pageMap = innitMap();
   // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
   const submit = document.querySelector('#get-resto'); // get a reference to your submit button
@@ -159,7 +159,7 @@ async function mainEvent() {
       console.log(event.target.value);
       const filteredList = filterList(currentList, event.target.value);
       injectHTML(filteredList);
-      markerPlace(filteredList, pageMap);
+      // markerPlace(filteredList, pageMap);
     });
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
     // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
@@ -172,7 +172,7 @@ async function mainEvent() {
 
       // And this function call will perform the "side effect" of injecting the HTML list for you
       injectHTML(currentList);
-      markerPlace(currentList, pageMap);
+      // markerPlace(currentList, pageMap);
 
       // By separating the functions, we open the possibility of regenerating the list
       // without having to retrieve fresh data every time
