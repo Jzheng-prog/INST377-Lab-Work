@@ -172,9 +172,9 @@ async function mainEvent() {
      */
   initChart(chartTarget);
   const chartData = await getData();
-  
-  // const results = await fetch('/api/foodServicePG');
-  // const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
+
+  const results = await fetch('/api/foodServicePG');
+  const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
   /*
       Below this comment, we log out a table of all the results using "dot notation"
       An alternate notation would be "bracket notation" - arrayFromJson["data"]
@@ -191,7 +191,7 @@ async function mainEvent() {
   // console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (chartData.data?.length > 0) { // the question mark in this means "if this is set at all"
+  if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
