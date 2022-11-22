@@ -98,10 +98,9 @@ function initChart(chart) {
     type: 'line',
     date: data,
     options: {}
-  }
+  };
 
-  return new chart(
-    document.getElementById('myChart'),
+  return new Chart(
     chart,
     config
   );
