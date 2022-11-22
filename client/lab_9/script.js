@@ -74,6 +74,38 @@ function processRestaurants(list) {
       - Return the new list of 15 restaurants so we can work on it separately in the HTML injector
     */
 }
+function initChart(chart) {
+  const labels = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun'
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset'
+      backgroundColor: 'rgb(255, 99, 132',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [0, 10, 5, 2, 20, 30, 45]
+    }]
+  };
+
+  const config = {
+    type: 'line',
+    date: data,
+    options: {}
+  }
+
+  return new chart(
+    document.getElementById('myChart'),
+    chart,
+    config
+  );
+}
 function filterList(array, filterInputValue) {
   return array.filter((item) => {
     if (!item.name) { return; }
@@ -122,6 +154,8 @@ async function mainEvent() {
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
   const submit = document.querySelector('#get-resto'); // get a reference to your submit button
   const loadAnimation = document.querySelector('.lds-ellipsis');
+  const restoName = document.querySelector('#resto');
+  const chartTarget = document.querySelector('#myChart');
   submit.style.display = 'none'; // let your submit button disappear
 
   /*
@@ -132,6 +166,7 @@ async function mainEvent() {
   const results = await fetch('/api/foodServicePG');
   const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
 
+  initChart(chartTarget);
   /*
       Below this comment, we log out a table of all the results using "dot notation"
       An alternate notation would be "bracket notation" - arrayFromJson["data"]
