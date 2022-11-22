@@ -212,6 +212,22 @@ async function mainEvent() {
       // without having to retrieve fresh data every time
       // We also have access to some form values, so we could filter the list based on name
     });
+
+    restoName.addEventListener('input', (event) => {
+      if (!currentList.length) { return; }
+
+      const restaurants = currentList
+        .filter((item) => {
+          const lowerCaseName = item.name.toLowerCase();
+          const lowerCaseQuery = event.target.value.toLowerCase();
+          return lowerCaseName.includes(lowerCaseQuery);
+        })
+        .filter((item) => Boolean(item.geocoded_column_1));
+
+      if (restaurants.length > 0) {
+        injectHTML(restaurants);
+      }
+    });
   }
 }
 
