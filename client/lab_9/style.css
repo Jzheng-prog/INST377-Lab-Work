@@ -330,6 +330,11 @@
   .next:hover {
     /* Pick a good background colour for your hover pseudoclass */
   }
+
+  .chart_container{
+    height: 100%;
+    width: 100%;
+  }
   
   
   /*

@@ -105,6 +105,14 @@ function initChart(chart) {
     config
   );
 }
+
+async function getData() {
+  const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'; // remote URL! you can test it in your browser
+  const data = await fetch(url); // We're using a library that mimics a browser 'fetch' for simplicity
+  const json = await data.json(); // the data isn't json until we access it using dot notation
+  const reply = json.filter((item) => Boolean(item.geocoded_column_1)).filter((item) => Boolean(item.name));
+  return reply;
+}
 function filterList(array, filterInputValue) {
   return array.filter((item) => {
     if (!item.name) { return; }
@@ -162,10 +170,11 @@ async function mainEvent() {
       This next line goes to the request for 'GET' in the file at /server/routes/foodServiceRoutes.js
       It's at about line 27 - go have a look and see what we're retrieving and sending back.
      */
-  const results = await fetch('/api/foodServicePG');
-  const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
-
   initChart(chartTarget);
+  const chartData = await getData();
+  
+  // const results = await fetch('/api/foodServicePG');
+  // const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
   /*
       Below this comment, we log out a table of all the results using "dot notation"
       An alternate notation would be "bracket notation" - arrayFromJson["data"]
@@ -182,7 +191,7 @@ async function mainEvent() {
   // console.log(`${arrayFromJson.data[0].name} ${arrayFromJson.data[0].category}`);
 
   // This IF statement ensures we can't do anything if we don't have information yet
-  if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
+  if (chartData.data?.length > 0) { // the question mark in this means "if this is set at all"
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
