@@ -74,23 +74,17 @@ function processRestaurants(list) {
       - Return the new list of 15 restaurants so we can work on it separately in the HTML injector
     */
 }
-function initChart(chart) {
-  const labels = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun'
-  ];
+function initChart(chart, object) {
+  const labels = Object.keys(object);
 
+  const info = Object.keys(object).map((item) => object[item].length);
   const data = {
     labels: labels,
     datasets: [{
-      label: 'My First dataset',
+      label: 'Restorant by Category',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45]
+      data: info
     }]
   };
 
@@ -104,6 +98,27 @@ function initChart(chart) {
     chart,
     config
   );
+}
+function changeChart(chart, object) {
+  const labels = Object.keys(object);
+  const info = Object.keys(object).map((item) => object[item].length);
+  chart.data.labels = labels;
+  chart.data.datasets.forEach((set) => {
+    set.data = info;
+    return set;
+  });
+  chart.update();
+}
+
+function shapeDataForLineChart(array) {
+  return array.reduce((collection, item) => {
+    if (!collection[item.category]) {
+      collection[item.category] = [item];
+    } else {
+      collection[item.category].push(item);
+    }
+    return collection;
+  }, {});
 }
 
 async function getData() {
@@ -170,8 +185,10 @@ async function mainEvent() {
       This next line goes to the request for 'GET' in the file at /server/routes/foodServiceRoutes.js
       It's at about line 27 - go have a look and see what we're retrieving and sending back.
      */
-  initChart(chartTarget);
   const chartData = await getData();
+  const shapedData = shapeDataForLineChart(chartData);
+  console.log(shapedData);
+  const myChart = initChart(chartTarget, shapedData);
 
   const results = await fetch('/api/foodServicePG');
   const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
@@ -202,6 +219,8 @@ async function mainEvent() {
       console.log(event.target.value);
       const filteredList = filterList(currentList, event.target.value);
       injectHTML(filteredList);
+      const localData = shapeDataForLineChart(currentList);
+      changeChart(myChart, localData);
       // markerPlace(filteredList, pageMap);
     });
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
@@ -215,6 +234,8 @@ async function mainEvent() {
 
       // And this function call will perform the "side effect" of injecting the HTML list for you
       injectHTML(currentList);
+      const localData = shapeDataForLineChart(currentList);
+      changeChart(myChart, localData);
       // markerPlace(currentList, pageMap);
 
       // By separating the functions, we open the possibility of regenerating the list
