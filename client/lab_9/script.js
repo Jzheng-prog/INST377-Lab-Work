@@ -176,7 +176,7 @@ async function mainEvent() {
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
   const submit = document.querySelector('#get-resto'); // get a reference to your submit button
   const loadAnimation = document.querySelector('.lds-ellipsis');
-  const restoName = document.querySelector('#resto');
+  // const restoName = document.querySelector('#resto');
   const chartTarget = document.querySelector('#myChart');
   submit.style.display = 'none'; // let your submit button disappear
 
@@ -243,21 +243,21 @@ async function mainEvent() {
       // We also have access to some form values, so we could filter the list based on name
     });
 
-    restoName.addEventListener('input', (event) => {
-      if (!currentList.length) { return; }
+    // restoName.addEventListener('input', (event) => {
+    //   if (!currentList.length) { return; }
 
-      const restaurants = currentList
-        .filter((item) => {
-          const lowerCaseName = item.name.toLowerCase();
-          const lowerCaseQuery = event.target.value.toLowerCase();
-          return lowerCaseName.includes(lowerCaseQuery);
-        })
-        .filter((item) => Boolean(item.geocoded_column_1));
+    //   const restaurants = currentList
+    //     .filter((item) => {
+    //       const lowerCaseName = item.name.toLowerCase();
+    //       const lowerCaseQuery = event.target.value.toLowerCase();
+    //       return lowerCaseName.includes(lowerCaseQuery);
+    //     })
+    //     .filter((item) => Boolean(item.geocoded_column_1));
 
-      if (restaurants.length > 0) {
-        injectHTML(restaurants);
-      }
-    });
+    //   if (restaurants.length > 0) {
+    //     injectHTML(restaurants);
+    //   }
+    // });
   }
 }
 
